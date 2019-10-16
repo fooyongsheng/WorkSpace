@@ -48,11 +48,11 @@
 
 ​	[darknet](https://pjreddie.com/darknet/yolo/)适用的训练数据模型有voc和coco，通常用voc会相对简单一点，使用自己的数据集训练时候
 
-​	(1) 将自己的数据转换为voc格式，通常数据集下面有两个文件夹Annotations和JPEGImages，前者存放bounding box的标注数据xml文件，后者是原始图像文件。运行代码detection/train_voc/voc_utils.py，在该路径下得到共6个文件，包括训练集和测试集。
+​		(1) 将自己的数据转换为voc格式，通常数据集下面有两个文件夹Annotations和JPEGImages，前者存放bounding box的标注数据xml文件，后者是原始图像文件。运行代码detection/train_voc/voc_utils.py，在该路径下得到共6个文件，包括训练集和测试集。
 
-​	(2) 如果标注数据不规范，使用detection/train_voc/xml_process.py进行处理。
+​		(2) 如果标注数据不规范，使用detection/train_voc/xml_process.py进行处理。
 
-​	(3) 修改detection/train_voc/voc.data, voc.names, yolov3-voc.cfg，注意cfg文件中，训练和测试时候的batch和subdivisions参数的变化，网络最后的输出层中filters要更加类别做修改，filters=(5+numclass)*3. 
+​		(3) 修改detection/train_voc/voc.data, voc.names, yolov3-voc.cfg，注意cfg文件中，训练和测试时候的batch和subdivisions参数的变化，网络最后的输出层中filters要更加类别做修改，filters=(5+numclass)*3. 
 
 
 
