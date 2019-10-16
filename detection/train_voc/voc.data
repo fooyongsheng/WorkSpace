@@ -1,0 +1,6 @@
+classes= 1
+train  = /home/yxq/Workspace/darknet/train_my_data/HW_car/VOC2007/HW_car_train.txt  
+valid  = /home/yxq/Workspace/darknet/train_my_data/HW_car/VOC2007/HW_car_test.txt 
+names = /home/yxq/Workspace/darknet/train_my_data/voc.names
+backup = backup
+eval = voc
