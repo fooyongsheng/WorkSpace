@@ -58,17 +58,27 @@
 ##### conda使用
 
 > conda创建env环境：conda create -n env_name python=X.X(2.7, 3.5, 3.6)
+>
 > conda查看env列表: conda env list
+>
 > conda激活环境：conda activate env_name
+>
 > conda关闭环境：conda deactivate
+>
 > conda查看安装的包：conda list
+>
 > codna删除环境：conda remove -n env_name --all
 
 ##### virtualenv使用，jupyter notebook
 
+> 查看Python路径：which python3.5
+>
 > 创建虚拟环境：mkvirtualenv env_name -p /usr/bin/python3.5
+>
 > 激活环境：workon env_name  或 source activate env_name
+>
 > 关闭环境：deactivate
+>
 > 查看列表：lsvirtualenv
 >
 > 复制环境：cpvirtualenv source_env dst_env
@@ -94,38 +104,63 @@
 ##### 软链接的创建与删除：保持每一处链接文件的同步性
 
 > 软链接ln -s src dst,生成镜像，不会占用空间
+>
 > 硬链接ln src dst，占用磁盘空间
+>
 > 创建：sudo ln -s /origianl_path/directory_name   /save_path/symbolic_name
+>
 > 删除：rm -rf symbolic_name
+>
 > 修改：ln -s /new_link_path/directory_name  /save_path/symbolic_name
+>
 > 覆盖：-b
+>
 > 强制执行：-f
 
 ##### 修改Ubuntu下Python软链接
 
 > 查看Python对应指向：ls -l /usr/bin | grep python
+>
 > 删除原有Python软链接：rm /usr/bin/python
+>
 > 建立新的Python软链接：ln -s /usr/bin/python3.5 /usr/bin/python 
+>
 > 下载Python3版本的pip：apt-get insatll python3-pip
+>
 > 建立pip到pip3的软链接：ls -s /usr/bin/pip3 /usr/bin/pip
 
 ##### docker的使用
 
 > 服务器上已经安装上docker，现在是在一个docker用户组下面配置自己的环境
+>
 > docker查看镜像列表：docker images 或 docker image ls
+>
 > docker查找镜像：docker search image_name(tensorflow, pytorch, ubuntu16.04)
+>
 > docker查看容器列表: docker ps -a
+>
 > docker删除镜像：
-> 		1).先退出容器：exit or ctrl+d
-> 		2).先删除对应的container： docker rm container_ID
-> 		3).再删除对应的image: docker rmi image_ID/repository_name
-> 		4).如果镜像存在子镜像，需要先删除子镜像
+>
+> ​		1).先退出容器：exit or ctrl+d
+>
+> ​		2).先删除对应的container： docker rm container_ID
+>
+> ​		3).再删除对应的image: docker rmi image_ID/repository_name
+>
+> ​		4).如果镜像存在子镜像，需要先删除子镜像
+>
 > docker创建镜像
-> 		1). 从镜像库中拉取： docker pull image_name(通过search寻找)
-> 		2). 从Dockerfile文件创建：docker run -i -t image_name /bin/bash
+>
+> ​		1). 从镜像库中拉取： docker pull image_name(通过search寻找)
+>
+> ​		2). 从Dockerfile文件创建：docker run -i -t image_name /bin/bash
+>
 > 镜像重命名：docker tag image_ID repository_name:tag_name
+>
 > 容器重命名：docker rename old_container_name new_container_name
+>
 > 启动镜像：docker run -it image_name /bin/bash    #-it交互运行，-d后台运行
+>
 > 将主机目录挂在到镜像：docker run -it -v local_path:in_image_path --name container_name image_name /bin/bash，(比如将服务器的根目录挂载到pytorch-yxq镜像下的root目录：nvidia-docker run -it -v /:/root --name home-yxq pytorch-yxq /bin/bash)
 >
 > 在docker中使用apt-get install之前：apt-get update
@@ -171,8 +206,11 @@
 > 在~/.bashrc中添加环境变量：
 >
 > ​								export MANPATH=${MANPATH}:/usr/local/texlive/2019/texmf-dist/doc/man
+>
 > ​								export INFOPATH=${INFOPATH}:/usr/local/texlive/2019/texmf-dist/doc/info
+>
 > ​								export PATH=${PATH}:/usr/local/texlive/2019/bin/x86_64-linux
+>
 > 安装成功测试：  tex --version
 >
 > 3). 安装texstudio
