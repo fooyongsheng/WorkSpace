@@ -47,13 +47,16 @@
 > import sys, os
 > sys.path.append(os.path.join(os.getcwd(),'directory_name/'))
 
-##### Ubuntu一个界面多命令行窗口
+##### Ubuntu常用快捷键
 
-> ctrl+shift+T
-
-##### ubuntu文件隐藏于显示
-
-> ctrl+h
+> 一个界面多命令行窗口：ctrl+shift+T
+>
+> 文件隐藏和显示：ctrl+h
+>
+> 命令行复制粘贴：ctrl+shift+c   ctrl+shift+v
+>
+> 查看系统是哪个Linux的发行版本： lsb_release -a
+>
 
 ##### conda使用
 
@@ -229,33 +232,33 @@
 >
 > ​															使用包：	\usepackage{xeCJK}  或 \usepackage{ctex}
 
-##### 绘图工具
+##### 各种便捷小工具
 
-> 绘制各种流程图
+> 绘制各种流程图[draw.io](https://www.draw.io/),  [ProcessOn](https://processon.com/)
 >
-> [draw.io](https://www.draw.io/)
+> Markdown使用: 编辑.md文件，推荐使用typora
 >
-> [ProcessOn](https://processon.com/)
-
-##### Markdown使用
-
-> 编辑.md文件，推荐：typora
-
-##### 记事本
-
 > 快捷美观记事本：oneNote
 >
 > 列表记事本：Trello
-
-##### 论文管理工具
-
-> 快捷管理论文，导出参考文献：mendeley
-
-##### 播放器
-
-> 可直接通过在线视频链接播放：[VLC](https://www.videolan.org/vlc/)
 >
-> 可按帧播放，快捷键提取帧画面：PotPlayer
+> 快捷管理论文，导出参考文献：mendeley
+>
+> 论文查找：[arxiv-sanity.com](http://www.arxiv-sanity.com/)
+>
+> 播放器：
+>
+> （1）可直接通过在线视频链接地址播放：[VLC](https://www.videolan.org/vlc/)
+>
+> （2）可按帧播放，快捷键提取帧画面：PotPlayer
+>
+> 编辑器：Sublime Text， VSCode， notepad++
+>
+> 编译器：
+>
+> （1）python，可远程编译：PyCharm Professional
+>
+> （2）C/C++：Clion, Visual Studio, dev C++轻便
 
 ##### 远程服务器
 
@@ -267,32 +270,12 @@
 >
 > ubuntu数据传输：FileZilla
 
-##### 编辑本
+##### Ubuntu软件安装和卸载
 
-> Sublime Text
+> 安装.deb安装包：sudo dpkg -i xxxx.deb
 >
-> VSCode
-
-##### 编译器
-
-> python，可远程编译：PyCharm Professional
+> 安装.sh文件：bash xxxx.sh
 >
-> C/C++：Clion, Visual Studio, dev C++轻便
-
-##### ubuntu安装软件包
-
-> .deb安装包：sudo dpkg -i xxxx.deb
->
-> .sh安装：bash xxxx.sh
-
-##### 查看系统版本
-
-> 查看系统是哪个Linux的发行版本
->
-> lsb_release -a
-
-##### Ubuntu卸载软件
-
 > 查看软件安装位置：whereis xxx，比如卸载vscode, whereis code
 >
 > 通过apt-get 方式安装的，删除时会有提示确认
@@ -377,34 +360,3 @@
 >
 > ​																				git push origin master
 
-##### pytorch
-
-> 1. 查看函数文档： torch.func_name?   或 torch.func_name??
-
-##### IPython
-
-> %，魔术命令：
->
-> （1）%hist 查看在当前IPython下的输入历史
->
-> （2）%timeit a.sum()  检测某条语句的执行时间
->
-> （3）%paste 执行粘贴板中的代码
->
-> （4）%cat a.py  查看某一个文件的内容
->
-> （5）%run -i a.py 执行文件，-i表示在当前命令空间中执行
->
-> （6）% command? 或 %command?? 查看使用说明
->
-> （7）%quickref 显示快速参考
->
-> （8）%who显示当前命名空间中的变量
->
-> （9）%debug进入调试模式，按q退出
->
-> （10）%magic查看所有魔术命令
->
-> （11）%env查看系统环境变量
->
-> （12）%xdel 删除变量并删除其在IPython上的一切引用
