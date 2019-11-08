@@ -3,6 +3,42 @@
 > pip install tensorflow-gpu==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
 >
 > 把conda源设置为清华源：conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/         conda config --set show_channel_urls yes
+>
+> 将pip下载源修改为清华源：
+>
+> ​	(1) 在home下创建.pip目录：mkdir ~/.pip
+>
+> ​	(2) 切换：cd ~/.pip
+>
+> ​	(3) 创建config文件：touch pip.conf
+>
+> ​	(4) sudo gedit ~/.pip/pip.config
+>
+> ​	(5) 写入并保存:
+>
+> ​			[global]
+>
+> ​			index-url=https://pypi.tuna.tsinghua.edu.cn/simple
+>
+> ​			[install]
+>
+> ​			trusted-host=pypi.tuna.tsinghua.edu.cn
+>
+> ​	(6) 下载的时候需要切换到根目录下～
+>
+> 
+>
+> 国内源：
+>
+> ​	清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
+>
+> ​	阿里云：http://mirrors.aliyun.com/simple
+>
+> ​	中国科技大学：https://pypi.mirrors.ustc.edu.cn/simple
+>
+> ​	豆瓣：http://pypi.douban.com/simple
+>
+> ​			
 
 ##### Ubuntu常用压缩和解压
 
@@ -45,11 +81,22 @@
 ##### 导入自定义文件夹里面的py文件时
 
 > import sys, os
+>
 > sys.path.append(os.path.join(os.getcwd(),'directory_name/'))
+>
+> 或者也可以：
+>
+> import sys
+>
+> sys.path.extend(['absolute path1', 'absolute path2'])  可以添加多个
+
+
 
 ##### Ubuntu常用快捷键
 
 > 一个界面多命令行窗口：ctrl+shift+T
+>
+> 打开一个命令行窗口：ctrl+alt+T
 >
 > 文件隐藏和显示：ctrl+h
 >
@@ -57,6 +104,33 @@
 >
 > 查看系统是哪个Linux的发行版本： lsb_release -a
 >
+> 跳到命令行行首：ctrl+A
+>
+> 跳到命令行行尾：ctrl+E
+>
+> 进入文本模式：ctrl+alt+F1
+>
+> 进入图形界面：ctrl+alt+F7
+
+##### ubuntu安装NVIDIA驱动
+
+>进入文本模式：ctrl+alt+F1
+>
+>到相应目录下执行文件：bash install_driver.sh  其实就是执行下面两行命令
+>
+>临时关闭显示服务：sudo service lightdm stop
+>
+>安装驱动： sudo ./NVIDIA-Linux-x86_64-430.26.run --no-opengl-files --no-x-check --no-nouveau-check
+>
+>启动显示服务，自动跳转到桌面：sudo service lightdm restart
+>
+>查看显卡驱动：nvidia-smi
+>
+>查看动态显卡驱动信息：watch -n 1 nvidia-smi
+>
+>卸载驱动：sudo apt-get remove nvidia-*
+>
+>​					sudo apt-get autoremove
 
 ##### conda使用
 
@@ -136,13 +210,17 @@
 
 > 服务器上已经安装上docker，现在是在一个docker用户组下面配置自己的环境
 >
-> docker查看镜像列表：docker images 或 docker image ls
+> 查看镜像列表：docker images 或 docker image ls
 >
-> docker查找镜像：docker search image_name(tensorflow, pytorch, ubuntu16.04)
+> 查看特定镜像：docker images | grep REPOSITORY
 >
-> docker查看容器列表: docker ps -a
+> 查看特定镜像详细信息：docker inspect REPOSITORY
 >
-> docker删除镜像：
+> 查找镜像：docker search image_name(tensorflow, pytorch, ubuntu16.04)
+>
+> 查看容器列表: docker ps -a
+>
+> 删除镜像：
 >
 > ​		1).先退出容器：exit or ctrl+d
 >
@@ -152,19 +230,27 @@
 >
 > ​		4).如果镜像存在子镜像，需要先删除子镜像
 >
-> docker创建镜像
+> 创建镜像
 >
 > ​		1). 从镜像库中拉取： docker pull image_name(通过search寻找)
 >
-> ​		2). 从Dockerfile文件创建：docker run -i -t image_name /bin/bash
+> ​		2). 从Dockerfile文件创建：docker run -i -t image_name /bin/bash   
 >
-> 镜像重命名：docker tag image_ID repository_name:tag_name
+> ​                                                       #/bin/bash表示在container中启动一个bash shell
+>
+> 镜像重命名：docker tag IMAGE_ID REPOSITORY:TAG
+>
+> ​						docker tag  old_REPOSITORY:TAG  new_REPOSITORY:TAG
 >
 > 容器重命名：docker rename old_container_name new_container_name
 >
-> 启动镜像：docker run -it image_name /bin/bash    #-it交互运行，-d后台运行
+> 启动镜像：nvidia-docker run -it image_name /bin/bash    #-t进入终端  -i交互运行，-d后台运行
+>
+> 启动现有的镜像：nvidia-docker run -it REPOSITORY:TAG 
 >
 > 将主机目录挂在到镜像：docker run -it -v local_path:in_image_path --name container_name image_name /bin/bash，(比如将服务器的根目录挂载到pytorch-yxq镜像下的root目录：nvidia-docker run -it -v /:/root --name home-yxq pytorch-yxq /bin/bash)
+>
+> 主机目录挂载例子：nvidia-docker run -it -v /:/root  yxq/cuda10.0:py36-tf-torch，进入镜像后首先切到跟目录下~，然后才能访问所有路径
 >
 > 在docker中使用apt-get install之前：apt-get update
 >
@@ -172,11 +258,37 @@
 >
 > 启动容器：docker start container_ID
 >
-> 启动镜像：docker  start container_name  & docker attach container_name
+> 启动容器：docker  start container_name  
+>
+> 进入容器，退出后，container也跟着退出：docker attach container_name
+>
+> 进入容器，退出后，container可在后台运行：docker exec -it container_name /bin/bash
 >
 > 停止容器：docker stop name/contrainer_ID
 >
 > 强制停止容器：docker kill name/container_ID
+>
+> 把容器打包成镜像（pull 下来的镜像自己修改后需要打包）：
+>
+> 打开新端口，首先获得更新的容器id：docker ps -l
+>
+> ​								docker commit -m 'statement' CONTAINER_ID TAG
+>
+> ​							    docker commit -m 'statement' old_REPOSITORY  new_REPOSITORY:TAG
+>
+> 镜像迁移：docker save -o   ./image_name.tar  REPOSITORY:TAG
+>
+> 镜像批量迁移：docker save -o ./images.tar REPOSITORY:TAG1  REPOSITORY:TAG2 ...
+>
+> 导入镜像：docker load -i image_name.tar
+>
+> 导出和导入镜像(commit+save)：docker export -o ./image_name.tar REPOSITORY:TAG
+>
+> 遇到过的问题：
+>
+> 1. docker环境下似乎如法使用软连接，解决：需要直接在代码中使用绝对路径
+>
+> 2. docker默认共享内存很小，pytorch的IPC会利用共享内存，当在docker中训练pytorch模型，当DataLoader设置num_works>0时会出现程序崩溃，ERROR: Unexpected bus error encountered in worker. This might be caused by insufficient shared memory (shm)，解决：在开启容器时指定shm大小 --shm-size 16G，或者将将Dataloader的num_workers设置为0.例如：nvidia-docker run --shm-size 16G  -it -v /:/root  yxq/cuda10.0:py36-tf-torch
 
 ##### Latex
 
